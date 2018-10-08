@@ -84,8 +84,8 @@ class Loader(spark: SparkSession) {
 
   def loadRatings(path: String): DataFrame = {
     val rating_schema = StructType(Seq(
-      StructField("user", IntegerType, true),
-      StructField("movie", IntegerType, true),
+      StructField("userId", IntegerType, true),
+      StructField("movieId", IntegerType, true),
       StructField("rating", FloatType, true),
       StructField("timestamp", IntegerType, true)
     ))
@@ -94,6 +94,21 @@ class Loader(spark: SparkSession) {
       .format("csv")
       .option("header", "true")
       .schema(rating_schema)
+      .load(path)
+
+    ratings
+  }
+
+  def loadEvalRatings(path: String): DataFrame = {
+    val schema = StructType(Seq(
+      StructField("userId", IntegerType, true),
+      StructField("movieId", IntegerType, true)
+    ))
+
+    val ratings: DataFrame = spark.read
+      .format("csv")
+      .option("header", "true")
+      .schema(schema)
       .load(path)
 
     ratings
