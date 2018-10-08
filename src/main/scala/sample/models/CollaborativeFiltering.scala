@@ -67,6 +67,7 @@ class CollaborativeFiltering {
       .write
       .format("csv")
       .option("header", "true")
+      .mode("overwrite")
       .save(path)
   }
 
