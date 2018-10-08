@@ -1,4 +1,4 @@
-Recommender Systems
+Recommender Systems Sample Code
 ===
 
 ## Introduction
@@ -57,7 +57,21 @@ Based on this idea, the content of movies is not needed, only ratings on (user, 
 
 Technically, to solve this problem, a common way is to consider the the ratings as a user-movie 2 dimensional sparse rating matrix, and fill the matrix with matrix decomposition methods.
 
-There is an existing implementation of [alternating least squares (ALS)](http://spark.apache.org/docs/2.3.2/ml-collaborative-filtering.html) in Apache Spark. I directly applied it for the collaborative filtering model and obtained ~0.85 RMSE on 0.8/0.2 train test split.
+There is an existing implementation of [alternating least squares (ALS)](http://spark.apache.org/docs/2.3.2/ml-collaborative-filtering.html) in Apache Spark. I directly applied it for the collaborative filtering model and obtained ~0.85 RMSE on 0.8/0.2 randomly train test split.
 
 
 ### Content-Based
+
+For a content-based approach, a user profile containing the user's preference over movie features, such as genres, language, adults only or not, etc. will be determined for each user. Once we got the user profiles, we can then find the distance between a user profile and a movie by calculating the distance of the two vectors.
+
+To calculate the user profiles, it is possible to approach it by optimizing the squared distance between the dot product of a user profile and features of a movie and the actual rating of the user on the movie, which is basically a linear regression optimization problem.
+
+**Attention**: The code for this part is still WIP and not finished yet :( I'm not very familiar with linear algebra libraries in Scala at the moment. I've found [ND4S](https://github.com/deeplearning4j/nd4s) and use it together with Spark DataFrame, which doesn't seem to be a good idea converting through two different data structures. Also, DN4J doesn't support sparse matrix yet. Any recommendations are welcome.
+
+
+## Future work
+
+Some ideas of improvement are listed below. They are not implemented yet due to time reason.
+
+- For both collaborative filtering and content-based models, normalize user ratings with each user's average rating.
+- For the content-based model, feature engineering remains a big part of work to be done, such as extracting text features (TFIDF and/or Word2Vec), release decade and season, normalize / bucketize continuous features, etc.
