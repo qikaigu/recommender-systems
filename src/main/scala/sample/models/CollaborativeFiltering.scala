@@ -12,12 +12,12 @@ class CollaborativeFiltering {
   private var model: ALSModel = _
   private var predictions: DataFrame = _
 
-  def init(iterations: Int = 5, regParam: Double = 0.01): CollaborativeFiltering = {
+  def init(iterations: Int = 9, regParam: Double = 0.01): CollaborativeFiltering = {
     als = new ALS()
       .setMaxIter(iterations)
       .setRegParam(regParam)
-      .setUserCol("user")
-      .setItemCol("movie")
+      .setUserCol("userId")
+      .setItemCol("movieId")
       .setRatingCol("rating")
 
     this
@@ -61,8 +61,13 @@ class CollaborativeFiltering {
     println(s"Root-mean-square error = $rmse")
   }
 
-  def submit(): DataFrame = {
+  def submit(path: String): Unit = {
     predictions
+      .coalesce(1)
+      .write
+      .format("csv")
+      .option("header", "true")
+      .save(path)
   }
 
 }
