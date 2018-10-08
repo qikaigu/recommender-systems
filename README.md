@@ -1,0 +1,30 @@
+Recommender System
+===
+
+This repo contains sample code for building Collaborative Filtering and Content-Based recommender systems in Scala.
+
+Three files are provided:
+
+1. `input.ratings.csv` contains ratings from a user to a movie.
+
+|userId|movieId|rating| timestamp|
+|-----:|------:|-----:|---------:|
+|     1|  81834|   5.0|1425942133|
+|     1| 112552|   5.0|1425941336|
+|     1|  98809|   0.5|1425942640|
+
+2. `movies_metadata.csv` contains the metadata of movies.
+
+|adult|belongs_to_collection                                                                                   |budget   |genres                                                   |homepage                                    |movieId|imdb_id  |original_language|original_title                |overview                                                                                                                                                                                                                                                                                                                                                                                                                                                        |popularity|poster_path                     |production_companies                                                                                                                                                                                          |production_countries                                                  |release_date|revenue     |runtime|spoken_languages                          |status  |tagline                                                                                                                                                    |title                         |video|vote_average|vote_count|
+|-----|--------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------|--------------------------------------------|-------|---------|-----------------|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|------------|------------|-------|------------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|-----|------------|----------|
+|false|[10194,Toy Story Collection,/7G9915LfUQ2lVfwMEEhDsn3kT4B.jpg,/9FBwqcd9IRruEDUrTdcaafOMKUq.jpg]          |3.0E7    |[[16,Animation], [35,Comedy], [10751,Family]]            |http://toystory.disney.com/toy-story        |862    |tt0114709|en               |Toy Story                     |Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences.                                                                                                                                                 |21.946943 |/rhIRbceoE9lR4veEXuwCC2wARtG.jpg|[[3,Pixar Animation Studios]]                                                                                                                                                                                 |[[US,United States of America]]                                       |1995-10-30  |3.73554033E8|81.0   |[[en,English]]                            |Released|null                                                                                                                                                       |Toy Story                     |False|7.7         |5415      |
+|false|null                                                                                                    |6.5E7    |[[12,Adventure], [14,Fantasy], [10751,Family]]           |null                                        |8844   |tt0113497|en               |Jumanji                       |When siblings Judy and Peter discover an enchanted board game that opens the door to a magical world, they unwittingly invite Alan -- an adult who's been trapped inside the game for 26 years -- into their living room. Alan's only hope for freedom is to finish the game, which proves risky as all three find themselves running from giant rhinoceroses, evil monkeys and other terrifying creatures.                                                     |17.015539 |/vzmL6fP7aPKNKPRTFnZmiUfciyV.jpg|[[559,TriStar Pictures], [2550,Teitler Film], [10201,Interscope Communications]]                                                                                                                              |[[US,United States of America]]                                       |1995-12-15  |2.62797249E8|104.0  |[[en,English], [fr,Français]]             |Released|Roll the dice and unleash the excitement!                                                                                                                  |Jumanji                       |False|6.9         |2413      |
+
+3. `evaluation_ratings.csv` is the file with ratings to be predicted.
+
+|userId|movieId|rating|
+|-----:|------:|-----:|
+|     1|    110|     ?|
+|     1|   1968|     ?|
+|     1|   4878|     ?|
+
