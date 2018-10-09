@@ -66,7 +66,7 @@ For a content-based approach, a user profile containing the user's preference ov
 
 To calculate the user profiles, it is possible to approach it by optimizing the squared distance between the dot product of a user profile and features of a movie and the actual rating of the user on the movie, which is basically a linear regression optimization problem.
 
-**Attention**: The code for this part is still WIP and not finished yet :( I'm not very familiar with linear algebra libraries in Scala at the moment. I've found [ND4S](https://github.com/deeplearning4j/nd4s) and use it together with Spark DataFrame, which doesn't seem to be a good idea converting through two different data structures. Also, DN4J doesn't support sparse matrix yet. Any recommendations are welcome.
+**Attention**: The code for this part is still _WIP_ and not finished yet :( I'm not very familiar with linear algebra libraries in Scala at the moment. I've found [ND4S](https://github.com/deeplearning4j/nd4s) and use it together with Spark DataFrame, which doesn't seem to be a good idea converting through two different data structures. Also, DN4J doesn't support sparse matrix yet. Any recommendations are welcome.
 
 
 ## Future work
