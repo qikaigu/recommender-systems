@@ -1,0 +1,32 @@
+{
+	"name": "removed null modifiedAt",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "attempts_360",
+						"type": "DatasetReference"
+					},
+					"name": "attempts"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "attempts_without_null",
+						"type": "DatasetReference"
+					},
+					"name": "attemptsWithoutNullModifiedAt"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filterNotNullModifiedAt"
+				}
+			],
+			"script": "source(output(\n\t\tauthor as string,\n\t\tcourse as string,\n\t\tmodifiedAt as timestamp 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'',\n\t\tprogress as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\tdateFormats: ['yyyy-MM-dd'],\n\ttimestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\''],\n\tpreferredIntegralType: 'integer',\n\tpreferredFractionalType: 'double',\n\tbooleanFormat: ['True', 'False']) ~> attempts\nattempts filter(isNull('modifiedAt')) ~> filterNotNullModifiedAt\nfilterNotNullModifiedAt sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tauthor as string,\n\t\tcourse as string,\n\t\tmodifiedAt as string,\n\t\tprogress as string\n\t),\n\tumask: 0022,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1) ~> attemptsWithoutNullModifiedAt"
+		}
+	}
+}

@@ -1,0 +1,43 @@
+{
+	"name": "SAR_all_user_recs_top_100_with_id",
+	"properties": {
+		"description": "\"id\": {user_id}::{item_id}",
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "SAR_all_user_recs_top_100_with_id.json",
+				"container": "mongodump"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"user_id": {
+					"type": "string"
+				},
+				"item_id": {
+					"type": "string"
+				},
+				"prediction": {
+					"type": "number"
+				},
+				"_id": {
+					"type": "string"
+				},
+				"target_date": {
+					"type": "string"
+				},
+				"company_id": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

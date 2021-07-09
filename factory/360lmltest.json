@@ -1,0 +1,9 @@
+{
+	"name": "360lmltest",
+	"location": "francecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "59c3af22-469d-4333-875a-eafc985c1bc5",
+		"tenantId": "8fa2e0ff-7ff3-4c6a-8d0d-bb3abbcc50da"
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"name": "machinelearning-runner-001",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

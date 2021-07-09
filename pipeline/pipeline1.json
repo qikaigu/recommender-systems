@@ -1,0 +1,59 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy json to CosmosDB",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "SAR_all_user_recs_top_100_with_id.json",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": true,
+							"partitionRootPath": "mongodump/SAR_all_user_recs_top_100_with_id.json"
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "CosmosDbMongoDbApiSink",
+						"writeBatchTimeout": "0:30:00",
+						"writeBatchSize": 10000,
+						"writeBehavior": "upsert"
+					},
+					"enableStaging": false,
+					"dataIntegrationUnits": 32
+				},
+				"inputs": [
+					{
+						"referenceName": "SAR_all_user_recs_top_100_with_id",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "CosmosDbMongoDbApiCollection1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-07-07T12:30:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
